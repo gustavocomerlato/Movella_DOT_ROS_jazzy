@@ -57,7 +57,7 @@ python3 movelladot_pc_sdk_receive_data.py
 
 ### ROS-Workspace
 
-The ROS workspace is created by following the ros workspace tutorials. You can download the workspace that I created from this [github repo](https://github.com/baslinjames/Movella_DOT_ROS/tree/master). Clone the repo to your computer (Home directory) using this command:
+The ROS workspace is created by following the ros workspace tutorials. You can download the workspace that I created from this [github repo](https://github.com/baslinjames/Movella_DOT_ROS/tree/master)(the current one). Clone the repo to your computer (Home directory) using this command:
 
 ```cpp
 git clone https://github.com/baslinjames/Movella_DOT_ROS.git
