@@ -12,7 +12,7 @@
 [Software Downloads | Movella.com](https://www.movella.com/support/software-documentation?hsCtaTracking=39d661fa-2ea8-4478-955e-01d0d8885f14|3ad1c7d6-9c3a-42e9-b424-5b15b9d0924e)
 
 - Once you download the SDK, extract the folder and go through the folder until you find ‘movelladotpcsdk_linux-x64_2023.6.sh’. Open a new terminal in that folder location and type:
-    1. if you want to install it in the default location that it shows on the screen - ‘/usr/local/movella’ 
+    1. If you want to install it in the default location that it shows on the screen - ‘/usr/local/movella’ 
     
     ```jsx
     sudo ./movelladotpcsdk_linux-x64_2023.6.sh
@@ -20,7 +20,7 @@
     
     **OR**
     
-    1. if you want to install it in a different location other than the root partition of your computer. 
+    1. If you want to install it in a different location other than the root partition of your computer. 
     
     ```jsx
     ./movelladotpcsdk_linux-x64_2023.6.sh
@@ -91,10 +91,10 @@ catkin build
 This should be successful. Now, you need to change one line in the ros_movella.cpp file:
 
 ```cpp
-#include "/home/**project**/Movella_DOT_ROS/devel/include/movella_dot/DotSensorMsg.h"
+#include "/home/project/Movella_DOT_ROS/devel/include/movella_dot/DotSensorMsg.h"
 ```
 
-You will need to change the bold part in the above command to your PC’s username. You can now uncomment the lines that you had commented out and save both the changes. Since we are using the cpp library, we need to execute the make file in the movella sdk directory. Navigate to /usr/local/movella/examples/xdpcsdk and open a terminal and run:
+You will need to change **project** in the above command to your PC’s username. You can now uncomment the lines that you had commented out and save both the changes. Since we are using the cpp library, we need to execute the make file in the movella sdk directory. Navigate to /usr/local/movella/examples/xdpcsdk and open a terminal and run:
 
 ```cpp
 sudo make
