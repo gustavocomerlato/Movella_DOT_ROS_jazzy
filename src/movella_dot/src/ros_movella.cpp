@@ -57,15 +57,6 @@ int main(int argc, char* argv[])
 		else
 			cout << "Setting filter profile failed!" << endl;
 
-        // // For logging orientation into CSV
-		// cout << "Setting Euler CSV output" << endl;
-		// device->setLogOptions(XsLogOptions::Euler);
-
-		// XsString logFileName = XsString("logfile_") << device->bluetoothAddress().replacedAll(":", "-") << ".csv";
-		// cout << "Enable logging to: " << logFileName.c_str() << endl;
-		// if (!device->enableLogging(logFileName))
-		// 	cout << "Failed to enable logging. Reason: " << device->lastResultText() << endl;
-
 		cout << "Putting device into measurement mode." << endl;
 		if (!device->startMeasurement(XsPayloadMode::ExtendedEuler))
 		{
@@ -106,11 +97,6 @@ int main(int argc, char* argv[])
 				if (packet.containsOrientation())
 				{
 					XsEuler euler = packet.orientationEuler();
-
-					// cout << "Roll:" << right << setw(7) << fixed << setprecision(4) << euler.roll()
-					// 	<< ", Pitch:" << right << setw(7) << fixed << setprecision(4) << euler.pitch()
-					// 	<< ", Yaw:" << right << setw(7) << fixed << setprecision(4) << euler.yaw()
-					// 	<< "| ";
 					
 					dot_msg.header.stamp = ros::Time::now();
 					if (seglist == "56")
@@ -152,19 +138,6 @@ int main(int argc, char* argv[])
 				}
 			}
 			cout << flush;
-			// if (!orientationResetDone && (XsTime::timeStampNow() - startTime) > 5000)
-			// {
-			// 	for (auto const& device : xdpcHandler.connectedDots())
-			// 	{
-			// 		cout << endl << "Resetting heading for device " << device->bluetoothAddress() << ": ";
-			// 		if (device->resetOrientation(XRM_Heading))
-			// 			cout << "OK";
-			// 		else
-			// 			cout << "NOK: " << device->lastResultText();
-			// 	}
-			// 	cout << endl;
-			// 	orientationResetDone = true;
-			// }
 		}
 		XsTime::msleep(0);
 	}
