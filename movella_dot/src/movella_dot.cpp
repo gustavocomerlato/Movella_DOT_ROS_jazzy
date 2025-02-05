@@ -1,4 +1,4 @@
-#include "movella_dot/ros_movella.hpp"
+#include "movella_dot/movella_dot.hpp"
 
 using namespace std;
 using namespace std::literals::string_literals;
