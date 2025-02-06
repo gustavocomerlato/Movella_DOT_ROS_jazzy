@@ -1,34 +1,21 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-<name>movella_dot</name>
-<version>0.0.1</version>
-<description>The movella_dot package</description>
-<maintainer email="gustavo.comerlato@gmail.com">Gustavo Comerlato</maintainer>
-<license>MIT</license>
+  <name>movella_dot</name>
+  <version>0.0.1</version>
+  <description>The movella_dot package</description>
+  <maintainer email="gustavo.comerlato@gmail.com">Gustavo Comerlato</maintainer>
+  <license>MIT</license>
 
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  
+
   <depend>std_msgs</depend>
   <depend>geometry_msgs</depend>
   <depend>sensor_msgs</depend>
   <depend>movella_msgs</depend>
   <depend>rclcpp</depend>
-
-  <build_depend>std_msgs</build_depend>
-  <build_depend>geometry_msgs</build_depend>
-  <build_depend>sensor_msgs</build_depend>
-  <build_depend>movella_msgs</build_depend>
-  <build_depend>rclcpp</build_depend>
-
-  <exec_depend>std_msgs</exec_depend>
-  <exec_depend>geometry_msgs</exec_depend>
-  <exec_depend>sensor_msgs</exec_depend>
-  <exec_depend>movella_msgs</exec_depend>
-  <exec_depend>rclcpp</exec_depend>
-
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
