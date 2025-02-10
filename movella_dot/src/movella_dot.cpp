@@ -64,17 +64,17 @@ namespace movella_dot
 
 			// Create IMU publisher and append to list
 			std::string topic = "/dot_"s + std::to_string(numdots + 1) + "/IMU"s;
-			auto pubI = create_publisher<sensor_msgs::msg::Imu>(topic, rclcpp::QoS(100), pub_options);
+			auto pubI = create_publisher<sensor_msgs::msg::Imu>(topic, rclcpp::SensorDataQoS(), pub_options);
 			imuPub_.push_back(pubI);
 
 			// Create magnetic field publisher and append to list
 			topic = "/dot_"s + std::to_string(numdots + 1) + "/magnetic_field"s;
-			auto pubM = create_publisher<sensor_msgs::msg::MagneticField>(topic, rclcpp::QoS(100), pub_options);
+			auto pubM = create_publisher<sensor_msgs::msg::MagneticField>(topic, rclcpp::SensorDataQoS(), pub_options);
 			magPub_.push_back(pubM);
 
 			// Create DOT data publisher and append to list
 			topic = "/dot_"s + std::to_string(numdots + 1) + "/dot"s;
-			auto pubD = create_publisher<movella_msgs::msg::DotSensor>(topic, rclcpp::QoS(100), pub_options);
+			auto pubD = create_publisher<movella_msgs::msg::DotSensor>(topic, rclcpp::SensorDataQoS(), pub_options);
 			dotPub_.push_back(pubD);
 
 
