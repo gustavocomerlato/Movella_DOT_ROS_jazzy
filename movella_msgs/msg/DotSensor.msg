@@ -2,10 +2,9 @@
 std_msgs/Header header
 uint32 status
 uint32 sample_time_fine
-geometry_msgs/Vector3 delta_velocity
-geometry_msgs/Quaternion Quaternion
+geometry_msgs/Quaternion quaternion
 geometry_msgs/Quaternion delta_quaternion
 geometry_msgs/Vector3 linear_acceleration
 geometry_msgs/Vector3 angular_velocity
-geometry_msgs/Vector3 magnetic_field
 geometry_msgs/Vector3 delta_velocity
+geometry_msgs/Vector3 magnetic_field
