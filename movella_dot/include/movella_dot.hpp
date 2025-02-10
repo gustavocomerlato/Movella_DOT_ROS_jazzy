@@ -7,18 +7,21 @@
 #include "xdpchandler.h"
 
 // ROS
-#include "rclcpp.hpp"
-#include "movella_msgs/msg/dot_sensor_msg.hpp"
+#include <rclcpp/rclcpp.hpp>
 #include <string>
 #include <vector>
 #include <sstream>
+#include "movella_msgs/msg/dot_sensor.hpp"
+#include <sensor_msgs/msg/imu.hpp>
+#include <sensor_msgs/msg/magnetic_field.hpp>
+// #include <geometry_msgs/msg/quaternion.hpp>
 
 namespace movella_dot
 {
 class MovellaDot : public rclcpp::Node
 {
 public:
-	MovellaDot(std::string node_name, double xdpc_period);
+	MovellaDot(std::string node_name);
 	~MovellaDot(void);
 
 	XdpcHandler xdpcHandler_;
@@ -26,9 +29,10 @@ public:
 
 	bool xdpc_initialize()
 	{
-		if (!this->xdpcHandler_.initialize())
+		if (!this->xdpcHandler_.initialize()){
 			RCLCPP_ERROR_STREAM(get_logger(), "Failed to initialize xdpcHandler. Aborting.");
-		return 0;
+			return false;
+		}
 
 		this->xdpcHandler_.scanForDots();
 
@@ -36,10 +40,10 @@ public:
 		{
 			RCLCPP_ERROR_STREAM(get_logger(), "No Movella DOT device(s) found. Aborting.");
 			this->xdpcHandler_.cleanup();
-			return 0;
+			return false;
 		}
 		RCLCPP_INFO_STREAM(get_logger(),
-											 "Detected " + std::itoa(this->xdpcHandler_.detectedDots().size()) + " DOT device(s)."s);
+											 "Detected "  << this->xdpcHandler_.detectedDots().size() << " DOT device(s).");
 
 		this->xdpcHandler_.connectDots();
 
@@ -47,11 +51,11 @@ public:
 		{
 			RCLCPP_ERROR_STREAM(get_logger(), "Could not connect to any Movella DOT device(s). Aborting.");
 			this->xdpcHandler_.cleanup();
-			return 0;
+			return false;
 		}
 		RCLCPP_INFO_STREAM(get_logger(),
-											 "Connected to " + std::itoa(this->xdpcHandler_.connectedDots().size()) + " DOT device(s).");
-		return 1;
+											 "Connected to " << this->xdpcHandler_.connectedDots().size() << " DOT device(s).");
+		return true;
 	};
 
 private:
@@ -60,17 +64,18 @@ private:
 	// ROS
 	rclcpp::TimerBase::SharedPtr timer_;
 	double t0_;
-	double xdpc_period;	 // xdpc callback period (ms)
+	std::chrono::milliseconds xdpc_period_;	 // xdpc callback period (ms)
 
-	std::vector<rclcpp::Publisher<movella_msgs::msg::dot_sensor>::SharedPtr> dotPub_;	 // DOT Message publisher
-	std::vector<rclcpp::Publisher<sensor_msgs::msg::imu>::SharedPtr> imuPub_;					 // IMU(Quat,Gyro,Acc) measurements
-	std::vector<rclcpp::Publisher<sensor_msgs::msg::magnetic_field>::SharedPtr> magPub_;	// Magnetic Field components
+	std::vector<rclcpp::Publisher<movella_msgs::msg::DotSensor>::SharedPtr> dotPub_;	 // DOT Message publisher
+	std::vector<rclcpp::Publisher<sensor_msgs::msg::Imu>::SharedPtr> imuPub_;					 // IMU(Quat,Gyro,Acc) measurements
+	std::vector<rclcpp::Publisher<sensor_msgs::msg::MagneticField>::SharedPtr> magPub_;	// Magnetic Field components
 
-	std::vector<movella_msgs::msg::dot_sensor> dotMsgs_;		// DOT Messages
-	std::vector<sensor_msgs::msg::imu> imuMsgs_;						// IMU Messages
-	std::vector<sensor_msgs::msg::magnetic_field> magPub_;	// Magnetic Field Messages
+	std::vector<movella_msgs::msg::DotSensor> dotMsgs_;		// DOT Messages
+	std::vector<sensor_msgs::msg::Imu> imuMsgs_;						// IMU Messages
+	std::vector<sensor_msgs::msg::MagneticField> magMsgs_;	// Magnetic Field Messages
 
 	void timer_callback();	// Reads XSens DOT via handler and prepares messages for publishers, at an interval of
 													// xdpc_period ms
-}
+};
 }	 // namespace movella_dot
+#endif

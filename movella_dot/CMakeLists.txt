@@ -37,10 +37,44 @@ target_link_libraries(movella_dot
   ${MOVELLAEX_DIR}/xdpcsdk/cpp/conio.c
 )
 
+#Include
+
+## Movella Libs
+# add_library(MovellaSdk SHARED IMPORTED)
+# add_library(MovellaTypes SHARED IMPORTED)
+# add_library(XdpcHandler SHARED IMPORTED)
+# add_library(Conio SHARED IMPORTED)
+
+# # Provide the full path to the library, so CMake knows where to find it.
+# set_target_properties(MovellaSdk PROPERTIES IMPORTED_LOCATION ${MOVELLALIB_DIR}/libmovelladot_pc_sdk.so)
+# set_target_properties(MovellaTypes PROPERTIES IMPORTED_LOCATION  ${MOVELLALIB_DIR}/libxstypes.so.2022)
+# set_target_properties(XdpcHandler PROPERTIES IMPORTED_LOCATION  ${MOVELLAEX_DIR}/xdpcsdk/cpp/xdpchandler.cpp.o)
+# set_target_properties(Conio PROPERTIES IMPORTED_LOCATION ${MOVELLAEX_DIR}/xdpcsdk/cpp/conio.c)
+
+# target_include_directories(movella_dot PUBLIC
+#   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+#   $<INSTALL_INTERFACE:include>
+#   ${MOVELLAEX_DIR}/xdpcsdk/cpp
+#   ${MOVELLA_DIR}/include/
+# )
+# # Linking
+# target_link_libraries(movella_dot MovellaLib MovellaTypes XdpcHandler Conio)
+
+
+
+
+
+
+
+
+
+
+
+
 ## Linking pthreads
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
-target_link_libraries(movella_dot PRIVATE Threads::Threads)
+target_link_libraries(movella_dot Threads::Threads)
 
 target_compile_features(movella_dot PUBLIC c_std_99 cxx_std_17) # Require C99, C++17
 ament_target_dependencies(
