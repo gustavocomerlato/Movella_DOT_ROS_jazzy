@@ -15,9 +15,6 @@ find_package(movella_msgs REQUIRED)
 
 # Paths for movella dot libraries and xdpchandler
 set(MOVELLA_DIR "/usr/local/movella")
-set(MOVELLALIB_DIR "/usr/local/movella/lib")
-set(MOVELLAEX_DIR "/usr/local/movella/examples")
-
 
 ## add executables
 add_executable(movella_dot src/movella_dot.cpp)
@@ -26,50 +23,16 @@ add_executable(movella_dot src/movella_dot.cpp)
 target_include_directories(movella_dot PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
-  ${MOVELLAEX_DIR}/xdpcsdk/cpp
+  ${MOVELLA_DIR}/examples/xdpcsdk/cpp
   ${MOVELLA_DIR}/include/
 )
 # Linking
 target_link_libraries(movella_dot
-  ${MOVELLALIB_DIR}/libmovelladot_pc_sdk.so
-  ${MOVELLALIB_DIR}/libxstypes.so.2022
-  ${MOVELLAEX_DIR}/xdpcsdk/cpp/xdpchandler.cpp.o
-  ${MOVELLAEX_DIR}/xdpcsdk/cpp/conio.c
+  ${MOVELLA_DIR}/lib/libmovelladot_pc_sdk.so
+  ${MOVELLA_DIR}/lib/libxstypes.so.2022
+  ${MOVELLA_DIR}/examples/xdpcsdk/cpp/xdpchandler.cpp.o
+  ${MOVELLA_DIR}/examples/xdpcsdk/cpp/conio.c
 )
-
-#Include
-
-## Movella Libs
-# add_library(MovellaSdk SHARED IMPORTED)
-# add_library(MovellaTypes SHARED IMPORTED)
-# add_library(XdpcHandler SHARED IMPORTED)
-# add_library(Conio SHARED IMPORTED)
-
-# # Provide the full path to the library, so CMake knows where to find it.
-# set_target_properties(MovellaSdk PROPERTIES IMPORTED_LOCATION ${MOVELLALIB_DIR}/libmovelladot_pc_sdk.so)
-# set_target_properties(MovellaTypes PROPERTIES IMPORTED_LOCATION  ${MOVELLALIB_DIR}/libxstypes.so.2022)
-# set_target_properties(XdpcHandler PROPERTIES IMPORTED_LOCATION  ${MOVELLAEX_DIR}/xdpcsdk/cpp/xdpchandler.cpp.o)
-# set_target_properties(Conio PROPERTIES IMPORTED_LOCATION ${MOVELLAEX_DIR}/xdpcsdk/cpp/conio.c)
-
-# target_include_directories(movella_dot PUBLIC
-#   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-#   $<INSTALL_INTERFACE:include>
-#   ${MOVELLAEX_DIR}/xdpcsdk/cpp
-#   ${MOVELLA_DIR}/include/
-# )
-# # Linking
-# target_link_libraries(movella_dot MovellaLib MovellaTypes XdpcHandler Conio)
-
-
-
-
-
-
-
-
-
-
-
 
 ## Linking pthreads
 set(THREADS_PREFER_PTHREAD_FLAG ON)
