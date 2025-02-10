@@ -100,6 +100,13 @@ You will need to change **project** in the above command to your PC’s username
 sudo make
 ```
 
+NOTE: If the build fails in this step, you might be missing some libraries, such as libcholmod.so.3 and/or libumfpack.so.5, needed by the libxee_solver.so file. These can be installed by:
+
+```bash
+sudo add-apt-repository -y -s deb http://security.ubuntu.com/ubuntu jammy main universe # Use this command if working on Ubuntu 24.04 or newer, to add the repos
+sudo apt-get install libcholmod3 libumfpack5
+```
+
 Now go back to the other terminal where our ros workspace is opened and run:
 
 ```cpp
