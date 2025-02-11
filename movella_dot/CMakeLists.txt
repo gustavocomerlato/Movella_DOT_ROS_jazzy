@@ -55,9 +55,9 @@ install(TARGETS  movella_dot
 )
 
 # Installs the directories
-install(DIRECTORY launch
-	DESTINATION share/${PROJECT_NAME}
-)
+# install(DIRECTORY launch
+# 	DESTINATION share/${PROJECT_NAME}
+# )
 
 
 if(BUILD_TESTING)

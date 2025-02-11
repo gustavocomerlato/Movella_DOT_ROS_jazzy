@@ -1,0 +1,5 @@
+<launch>
+	<arg name="use_gui" default="false"/>
+	
+	<node name="rviz" pkg="rviz2" exec="rviz2" args="-d $(find-pkg-share movella_dot)/rviz/display.rviz"/>
+</launch>

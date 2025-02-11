@@ -129,16 +129,20 @@ namespace movella_dot
 		for (long unsigned int dd=0;dd<xdpcHandler_.connectedDots().size(); dd++){
 			RCLCPP_DEBUG_STREAM(get_logger(),"Device "<<std::to_string(dd) << " status: "
 				 << std::to_string(xdpcHandler_.packetAvailable(sensor_table_[dd]->bluetoothAddress())));
-		}
-		if (xdpcHandler_.packetsAvailable())
-		{
-			RCLCPP_DEBUG_STREAM(this->get_logger(), "All packets available. Publishing...");
-
-			for (long unsigned int dd=0;dd<xdpcHandler_.connectedDots().size(); dd++){
+			if (xdpcHandler_.packetAvailable(sensor_table_[dd]->bluetoothAddress())){
 				packet_callback(dd);
 			}
-			XsTime::msleep(0);	
-		}	
+		}
+		XsTime::msleep(0);
+		// if (xdpcHandler_.packetsAvailable())
+		// {
+		// 	RCLCPP_DEBUG_STREAM(this->get_logger(), "All packets available. Publishing...");
+
+		// 	for (long unsigned int dd=0;dd<xdpcHandler_.connectedDots().size(); dd++){
+		// 		packet_callback(dd);
+		// 	}
+		// 	XsTime::msleep(0);	
+		// }	
 	};
 
 	void MovellaDot::packet_callback(int device_num)
@@ -180,15 +184,15 @@ namespace movella_dot
 			XsQuaternion quat = packet.orientationQuaternion();
 
 			// Fills in quaternion data
-			dotMsg.quaternion.x = quat[0];
-			dotMsg.quaternion.y = quat[1];
-			dotMsg.quaternion.z = quat[2];
-			dotMsg.quaternion.w = quat[3];	 // Real part
+			dotMsg.quaternion.x = quat.x();
+			dotMsg.quaternion.y = quat.y();
+			dotMsg.quaternion.z = quat.z();
+			dotMsg.quaternion.w = quat.w();	 // Real part
 
-			imuMsg.orientation.x = quat[0];
-			imuMsg.orientation.y = quat[1];
-			imuMsg.orientation.z = quat[2];
-			imuMsg.orientation.w = quat[3];	 // Real part
+			imuMsg.orientation.x = quat.x();
+			imuMsg.orientation.y = quat.y();
+			imuMsg.orientation.z = quat.z();
+			imuMsg.orientation.w = quat.w();	 // Real part
 		}
 		if (packet.containsOrientationIncrement())	// Quaternion rate
 		{

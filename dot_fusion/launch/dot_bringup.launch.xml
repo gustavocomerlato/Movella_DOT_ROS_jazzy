@@ -1,0 +1,45 @@
+<launch>
+<arg name="use_sim_time" default="false"/>
+<arg name="ignition" default="false"/>
+
+<node name="movella_dot" pkg="movella_dot" exec="movella_dot"/>
+
+<node name="imu2pose" pkg="dot_fusion" exec="dot_fusion" namespace="dot_1">
+	<param name="pub_topic" value="pose"/>
+	<param name="sub_topic" value="IMU"/>
+</node>
+
+<node name="imu2pose" pkg="dot_fusion" exec="dot_fusion" namespace="dot_2">
+	<param name="pub_topic" value="pose"/>
+	<param name="sub_topic" value="IMU"/>
+</node>
+
+<node name="imu2pose" pkg="dot_fusion" exec="dot_fusion" namespace="dot_3">
+	<param name="pub_topic" value="pose"/>
+	<param name="sub_topic" value="IMU"/>
+</node>
+
+<node name="imu2pose" pkg="dot_fusion" exec="dot_fusion" namespace="dot_4">
+	<param name="pub_topic" value="pose"/>
+	<param name="sub_topic" value="IMU"/>
+</node>
+
+<node name="imu2pose" pkg="dot_fusion" exec="dot_fusion" namespace="dot_5">
+	<param name="pub_topic" value="pose"/>
+	<param name="sub_topic" value="IMU"/>
+</node>
+
+<node pkg="tf2_ros" exec="static_transform_publisher" name="static_tf_1"
+	args="--x 0 --frame-id map --child-frame-id 'XSens DOT 1'"/>
+<node pkg="tf2_ros" exec="static_transform_publisher" name="static_tf_2"
+	args="--x 1 --frame-id map --child-frame-id 'XSens DOT 2'"/>
+<node pkg="tf2_ros" exec="static_transform_publisher" name="static_tf_3"
+	args="--x 2 --frame-id map --child-frame-id 'XSens DOT 3'"/>
+<node pkg="tf2_ros" exec="static_transform_publisher" name="static_tf_4"
+	args="--x 3 --frame-id map --child-frame-id 'XSens DOT 4'"/>
+<node pkg="tf2_ros" exec="static_transform_publisher" name="static_tf_5"
+	args="--x 4 --frame-id map --child-frame-id 'XSens DOT 5'"/>
+
+<include file="$(find-pkg-share dot_fusion)/launch/display.launch.xml"/>
+
+</launch>
